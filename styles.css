@@ -70,7 +70,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 20px;
+  gap: 10px;
   margin-top: 0px;
   font-family: Arial, sans-serif;
 }
@@ -85,7 +85,7 @@ body {
 }
 
 .numero {
-  font-size: 1.9em;
+  font-size: 1.5em;
   font-weight: bold;
   color: rgb(10, 0, 95);
   margin-bottom: 20px  ;
@@ -679,97 +679,5 @@ button:hover {
 
 
 
-/* =============================
-   RESPONSIVE - MÓVILES
-   ============================= */
-@media screen and (max-width: 768px) {
-  
-  /* PORTADA */
-  .contenido-portada h1 {
-    font-size: 50px;
-    margin-bottom: -60px;
-  }
-  
-  .contenido-portada p {
-    font-size: 25px;
-    margin-bottom: -30px;
-  }
-
-  .fecha-evento {
-    font-size: 20px;
-    margin-top: 0;
-  }
-
-  /* GALERÍA */
-  .galeria-previa img, 
-  .galeria-posterior img {
-    width: 90%;
-    height: auto;
-  }
-
-  /* DETALLES EVENTO */
-  .detalles-evento iframe {
-    width: 100%;
-    height: 300px;
-  }
-
-  /* HISTORIA */
-  .historia h2 {
-    font-size: 40px;
-    line-height: 50px;
-  }
-
-  .historia p {
-    font-size: 1em;
-    line-height: 1.4;
-    padding: 0 10px;
-  }
-
-  /* RSVP */
-  .rsvp form {
-    padding: 15px;
-  }
-
-  .rsvp input, .rsvp select, .rsvp button {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  /* LISTA DE MÚSICA */
-  .lista-musica input {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  /* CARRUSEL */
-  .carrusel h2 {
-    font-size: 30px;
-  }
-
-  .slide img {
-    height: 250px;
-  }
-
-  /* FOOTER */
-  .footer-logo img {
-    max-height: 100px;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  .header-superior {
-    height: auto;
-    padding: 5px 10px;
-    flex-direction: column;
-  }
-
-  /* BOTÓN DE MÚSICA */
-  #music-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 1.2em;
-  }
-
-}
 
 
