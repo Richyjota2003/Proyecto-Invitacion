@@ -70,8 +70,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 70px;
-  margin-top: -30px;
+  gap: 30px;
+  margin-top: 0px;
   font-family: Arial, sans-serif;
 }
 
@@ -85,15 +85,17 @@ body {
 }
 
 .numero {
-  font-size: 2.9em;
+  font-size: 1.9em;
   font-weight: bold;
   color: rgb(10, 0, 95);
+  margin-bottom: 20px  ;
   
 }
 
 .unidad {
-  font-size: 1.5em;
+  font-size: 1.0em;
   margin-top: -50px;
+  margin-bottom: 20px;
   font-weight: bold;
   text-transform: uppercase;
   color: rgb(10, 0, 95);
@@ -138,6 +140,7 @@ section h2 {
 /* GALERÍAS */
 .galeria-previa, .galeria-posterior {
   display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
@@ -155,7 +158,8 @@ section h2 {
   cursor: pointer;
   transition: transform 0.3s ease;
   margin: 10px;
-  margin-top: -20px
+  margin-top: -20px;
+
 }
 
 .galeria-previa img:hover, .galeria-posterior img:hover {
@@ -222,6 +226,7 @@ section h2 {
    font-size: 80px;
    margin-top: 0px;
   margin-bottom: -10px;
+  line-height: 90px;
   font-weight: 500;
   color: #ffffff;
 }
@@ -321,6 +326,8 @@ background: #ffffff;
 
 .regalos-transferencias h2 {
   text-align: center;
+ line-height: 50px;
+ margin-bottom: 20px;
   color:rgb(10, 0, 95);
 
 }
@@ -355,6 +362,7 @@ background: #ffffff;
   margin-top: 0px;
   line-height: 1.6;
 }
+
 
 #lista-regalos p {
   font-size: 1.2em;;
@@ -463,9 +471,9 @@ background: #ffffff;
 
 .carrusel h2 {
   color: rgb(255, 255, 255);
-  margin-top: -100px;
+  margin-top: 00px;
   margin-bottom: -20px;
-  font-size: 90px;
+  font-size: 50px;
 }
 
 .slider-container {
@@ -670,96 +678,6 @@ button:hover {
 
 
 
-
-/* RESPONSIVE AVANZADO */
-
-/* Celulares pequeños */
-@media (max-width: 480px) {
-  .contenido-portada h1 {
-    font-size: 1.6em;
-    margin-bottom: -50px;
-  }
-  .contenido-portada p {
-    font-size: 1em;
-    margin-bottom: -30px;
-  }
-  .fecha-evento {
-    font-size: 1em;
-  }
-  .countdown {
-    flex-direction: column;
-    gap: 20px;
-    font-size: 1em;
-  }
-  .unidad {
-    margin-top: -20px;
-  }
-  section h2 {
-    font-size: 2em;
-  }
-  .detalles-evento iframe {
-    width: 95%;
-    height: 250px;
-  }
-  .galeria-previa img, .galeria-posterior img {
-    width: 100%;
-    height: auto;
-  }
-  .historia h2 {
-    font-size: 2em;
-  }
-  .historia p {
-    font-size: 1em;
-    padding: 0 10px;
-  }
-  .rsvp form {
-    padding: 15px;
-  }
-  .rsvp input, .rsvp select, .rsvp button {
-    padding: 10px;
-    font-size: 0.9em;
-  }
-  .lista-musica input {
-    width: 100%;
-  }
-  .lista-musica button {
-    width: 100%;
-  }
-  .carrusel h2 {
-    font-size: 2em;
-    margin-top: -50px;
-  }
-  .slide img {
-    height: auto;
-  }
-}
-
-/* Tablets */
-@media (max-width: 1024px) {
-  .contenido-portada h1 {
-    font-size: 3em;
-  }
-  .contenido-portada p {
-    font-size: 1.5em;
-  }
-  .countdown {
-    gap: 40px;
-    font-size: 1.2em;
-  }
-  section h2 {
-    font-size: 2.5em;
-  }
-  .detalles-evento iframe {
-    width: 90%;
-    height: 350px;
-  }
-}
-
-/* Ajuste general para imágenes */
-img {
-  max-width: 100%;
-  height: auto;
-}
 
 
 
