@@ -158,16 +158,19 @@
     <span class="cerrar">&times;</span>
     <img class="imagen-visor" id="imagen-visor">
   </div>
-
   <!-- LISTA DE MÚSICA -->
-  <section class="lista-musica">
-    <h2>Lista de Música</h2>
-    <p>¿Que canción no puede faltar?</p>
+<section class="lista-musica">
+  <h2>Lista de Música</h2>
+  <p>¿Qué canción no puede faltar?</p>
 
-    <input type="text" id="nueva-cancion" placeholder="Escribí tu canción aquí">
-    <button id="agregar-cancion">Agregar Canción</button>
+  <form name="lista-musica" method="POST" data-netlify="true">
+    <!-- Campo oculto obligatorio -->
+    <input type="hidden" name="form-name" value="lista-musica">
 
-  </section>
+    <input type="text" name="nueva-cancion" placeholder="Escribí tu canción aquí" required>
+    <button type="submit">Agregar Canción</button>
+  </form>
+</section>
 
   <!-- DETALLES DEL EVENTO -->
   <section class="detalles-evento">
@@ -181,26 +184,29 @@
   <!-- RSVP -->
   <section class="rsvp">
     <h2>Confirmar Asistencia</h2>
-    <form id="form-rsvp">
-      <input type="text" name="nombre" placeholder="Nombre" required>
-      <input type="text" name="apellido" placeholder="Apellido" required>
+    <form id="form-rsvp" name="contacto" method="POST" data-netlify="true">
+  <!-- Campo oculto obligatorio para Netlify -->
+  <input type="hidden" name="form-name" value="contacto">
 
-      <div class="opciones-asistencia">
-        <label><input type="radio" name="asistencia" value="Sí" required>Sí, asistiré</label>
-        <label><input type="radio" name="asistencia" value="No" required>No asistiré</label>
-      </div>
+  <input type="text" name="nombre" placeholder="Nombre" required>
+  <input type="text" name="apellido" placeholder="Apellido" required>
 
-      <label for="comida">Elige tu comida:</label>
-      <select name="comida" id="comida" required>
-        <option value="">Seleccionar</option>
-        <option value="Lo que venga">Lo que venga</option>
-        <option value="Vegetariano">Vegetariano</option>
-        <option value="Vegano">Vegano</option>
-        <option value="Celiaco">Celiaco</option>
-      </select>
+  <div class="opciones-asistencia">
+    <label><input type="radio" name="asistencia" value="Sí" required>Sí, asistiré</label>
+    <label><input type="radio" name="asistencia" value="No" required>No asistiré</label>
+  </div>
 
-      <button type="submit">Confirmar</button>
-    </form>
+  <label for="comida">Elige tu comida:</label>
+  <select name="comida" id="comida" required>
+    <option value="">Seleccionar</option>
+    <option value="Lo que venga">Lo que venga</option>
+    <option value="Vegetariano">Vegetariano</option>
+    <option value="Vegano">Vegano</option>
+    <option value="Celiaco">Celiaco</option>
+  </select>
+
+  <button type="submit">Confirmar</button>
+</form>>
     
     <div id="respuesta-rsvp"></div>
   </section>

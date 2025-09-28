@@ -575,24 +575,29 @@ section h2 {
 
 /* LISTA DE MÚSICA */
 .lista-musica {
-  max-width: auto;
+  max-width: 100%;
   margin: auto;
   color: rgb(10, 0, 95);
   background: #ffffff;
-  line-height: 1.2; /* ✅ más equilibrado */
+  line-height: 1.2;
   font-weight: 500;
-  color: rgb(10, 0, 95);
-  text-align: center; /* ✅ siempre centrado */
-  max-width: 100%; /* ✅ evita que se salga en celulares */
-  word-wrap: break-word; /* ✅ por si hay palabras largas */
-
+  text-align: center;
+  word-wrap: break-word;
 }
 
 .lista-musica h2 {
   color: rgb(10, 0, 95);
   margin-bottom: 20px;
 }
-.lista-musica input {
+
+.lista-musica form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.lista-musica input[name="nueva-cancion"] {
   width: 50%;
   padding: 10px;
   margin: 10px 5px 10px 0;
@@ -610,6 +615,11 @@ section h2 {
   cursor: pointer;
   transition: background 0.3s ease;
 }
+
+.lista-musica button:hover {
+  background: rgb(10, 0, 150);
+}
+
 
 
 
