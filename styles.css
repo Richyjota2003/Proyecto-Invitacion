@@ -597,7 +597,7 @@ section h2 {
   align-items: center;
 }
 
-.lista-musica input[name="nueva-cancion"] {
+.lista-musica input[name="cancion"] {
   width: 50%;
   padding: 10px;
   margin: 10px 5px 10px 0;

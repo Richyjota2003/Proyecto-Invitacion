@@ -158,40 +158,43 @@
     <span class="cerrar">&times;</span>
     <img class="imagen-visor" id="imagen-visor">
   </div>
-  <!-- LISTA DE MÚSICA -->
+
+<!-- LISTA DE MÚSICA -->
 <section class="lista-musica">
   <h2>Lista de Música</h2>
   <p>¿Qué canción no puede faltar?</p>
 
-  <form id="form-musica">
-    <input type="text" name="cancion" id="nueva-cancion" placeholder="Escribí tu canción aquí" required>
+  <form id="lista-musica-form">
+    <input type="text" name="cancion" placeholder="Escribí tu canción aquí" required>
     <button type="submit">Agregar Canción</button>
   </form>
 
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-(function(){
-  emailjs.init("TU_USER_ID"); // tu user_id de EmailJS
-})();
+  <div id="respuesta-musica"></div>
 
-document.getElementById("form-musica").addEventListener("submit", function(event){
-  event.preventDefault(); // evitar recargar página
+  <script>
+    document.getElementById("lista-musica-form").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-  const cancion = document.getElementById("nueva-cancion").value;
+      const cancion = e.target.cancion.value; // nombre exacto del input
 
-  emailjs.send("TU_SERVICE_ID", "TU_TEMPLATE_ID", {
-    cancion: cancion
-  }).then(function(response) {
-    console.log("Éxito!", response.status, response.text);
-    alert("Tu canción ha sido enviada!");
-    document.getElementById("form-musica").reset();
-  }, function(error) {
-    console.log("Error...", error);
-    alert("Hubo un error, intenta de nuevo.");
-  });
-});
-</script>
+      fetch("http://localhost:3000/lista-musica", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cancion }) // debe coincidir con backend
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("respuesta-musica").innerText = "Canción agregada ✅";
+        e.target.reset();
+      })
+      .catch(err => console.error(err));
+    });
+  </script>
 </section>
+
+
+
+
 
   <!-- DETALLES DEL EVENTO -->
   <section class="detalles-evento">
@@ -203,51 +206,56 @@ document.getElementById("form-musica").addEventListener("submit", function(event
   </section>
 
   <!-- RSVP -->
-  <section class="rsvp">
-    <h2>Confirmar Asistencia</h2>
-<form name="rsvp" method="POST" data-netlify="true">
-  <input type="hidden" name="form-name" value="rsvp">
+<!-- RSVP -->
+<section class="rsvp">
+  <h2>Confirmar Asistencia</h2>
+  <form id="form-rsvp">
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="apellido" placeholder="Apellido" required>
 
-  <input type="text" name="nombre" placeholder="Nombre" required>
-  <input type="text" name="apellido" placeholder="Apellido" required>
+    <div class="opciones-asistencia">
+      <label><input type="radio" name="asistencia" value="Sí" required>Sí, asistiré</label>
+      <label><input type="radio" name="asistencia" value="No" required>No asistiré</label>
+    </div>
 
-  <div class="opciones-asistencia">
-    <label><input type="radio" name="asistencia" value="Sí" required>Sí, asistiré</label>
-    <label><input type="radio" name="asistencia" value="No" required>No asistiré</label>
-  </div>
+    <label for="comida">Elige tu comida:</label>
+    <select name="comida" id="comida" required>
+      <option value="">Seleccionar</option>
+      <option value="Lo que venga">Lo que venga</option>
+      <option value="Vegetariano">Vegetariano</option>
+      <option value="Vegano">Vegano</option>
+      <option value="Celiaco">Celiaco</option>
+    </select>
 
-  <label for="comida">Elige tu comida:</label>
-  <select name="comida" id="comida" required>
-    <option value="">Seleccionar</option>
-    <option value="Lo que venga">Lo que venga</option>
-    <option value="Vegetariano">Vegetariano</option>
-    <option value="Vegano">Vegano</option>
-    <option value="Celiaco">Celiaco</option>
-  </select>
+    <button type="submit">Confirmar</button>
+  </form>
 
-  <button type="submit">Confirmar</button>
-</form>
-    
-    <div id="mensaje-rsvp"></div>
+  <div id="respuesta-rsvp"></div>
 
-<script>
-document.getElementById("rsvp-form").addEventListener("submit", function(event) {
-  event.preventDefault(); // evita el comportamiento normal del form
-  const form = event.target;
-  const data = new FormData(form);
+  <script>
+    document.getElementById("form-rsvp").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-  fetch("/", {
-    method: "POST",
-    body: data
-  }).then(() => {
-    document.getElementById("mensaje-rsvp").innerHTML = "<p>¡Gracias! Tu respuesta fue enviada.</p>";
-    form.reset();
-  }).catch((error) => {
-    document.getElementById("mensaje-rsvp").innerHTML = "<p>Hubo un error. Intenta nuevamente.</p>";
-  });
-});
-</script>
-  </section>
+      const nombre = e.target.nombre.value;
+      const apellido = e.target.apellido.value;
+      const asistencia = e.target.asistencia.value;
+      const comida = e.target.comida.value;
+
+      fetch("http://localhost:3000/rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, apellido, asistencia, comida })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("respuesta-rsvp").innerText = "Asistencia confirmada ✅";
+        e.target.reset();
+      })
+      .catch(err => console.error(err));
+    });
+  </script>
+</section>
+
 
   <!-- MÚSICA -->
 
