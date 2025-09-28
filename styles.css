@@ -18,24 +18,14 @@ body {
 
 .portada {
   position: relative;
-  height: 100vh;
-  background: url('/Source/DSC_0119.jpg') left center/cover no-repeat;
+  height: 90vh;
+  background: url('/Source/DSC_0014.jpg') center center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
-@media (max-width: 768px) {
-  .portada {
-    background-position: -100px center;
-  }
-}
 
-@media (max-width: 480px) {
-  .portada {
-    background-position: -100px center;
-  }
-}
 
 .overlay {
   position: absolute;
@@ -48,45 +38,92 @@ body {
 }
 
 .contenido-portada {
-  position: flex;
-  z-index: 1;
-  padding: 20px;
-  margin-top: 500px;
-  line-height: normal;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    margin-top: 50vh;
 }
 
 .contenido-portada h1 {
     font-family: "Luxurious Roman", serif;
-  font-size: 80px;
-  line-height: 100px;
-  margin-bottom: 0px;
-  font-weight: 500;
-  color: #ffffff;
+    font-size: clamp(80px, 5vw, 200px); /* ajustar el valor relativo */
+    line-height: 1;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 3vh;
 }
 
 .contenido-portada p {
     font-family: "Luxurious Roman", serif;
-  font-size: 50px;
-  line-height: 100px;
-  margin-bottom: 0px;
-  font-weight: 100;
-  color: #ffffff;
-}
+    font-size: clamp(30px, 2vw, 50px); /* ajustar valores */
+    line-height: 1;
+    font-weight: 100;
+    color: #ffffff;
 
+}
 
 .fecha-evento {
     font-family: "Luxurious Roman", serif;
-  font-size: 30px;
-  margin-top: -10px;
-  font-weight: 100;
-  color: #ffffff;
+    font-size: clamp(25px, 1.5vw, 40px); /* ajustar valores */
+    font-weight: 100;
+    color: #ffffff;
+}
+
+
+
+@media screen and (max-width: 2560px) {
+  .contenido-portada {
+    margin-top: 60vh;
+  }
+  
+  .contenido-portada h1 {
+    font-size: clamp(80px, 8vw, 500px); /* ajustar el valor relativo */
+    margin-bottom: 2vh;
+  }
+
+  .contenido-portada p {
+    font-size: clamp(40px, 4vw, 90px); /* ajustar valores */
+  }
+
+  .fecha-evento {
+    font-size: clamp(35px, 3vw, 70px); /* ajustar valores */
+  }
+  
+}
+
+
+
+
+
+@media screen and (max-width: 768px) {
+  .contenido-portada {
+    margin-top: 60vh;
+  }
+  
+  .contenido-portada h1 {
+    font-size: clamp(50px, 8vw, 200px); /* ajustar el valor relativo */
+    margin-bottom: 2vh;
+  }
+
+  .contenido-portada p {
+    font-size: clamp(20px, 4vw, 80px); /* ajustar valores */
+  }
+
+  .fecha-evento {
+    font-size: clamp(15px, 3vw, 60px); /* ajustar valores */
+  }
+  
 }
 
 .countdown {
     background: #ffffff;
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 60px;
   font-family: Arial, sans-serif;
 }
 
@@ -101,39 +138,7 @@ body {
 }
 
 .numero {
-  font-size: 2.5em;
-  font-weight: bold;
-  color: rgb(10, 0, 95);
-  margin-bottom: 20px  ;
-  
-}
-
-.unidad {
-  font-size: 1.5em;
-  margin-top: -50px;
-  margin-bottom: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: rgb(10, 0, 95);
-}
-
-@media (max-width: 768px) {
-  .countdown {
-    background: #ffffff;
-  display: flex;
-  justify-content: center;
-line-height: 90px;
-  font-family: Arial, sans-serif;
-}
-  .countdown {
-    background: #ffffff;
-  display: block;
-  gap: 10px;
-  line-height: 90px;
-  font-family: Arial, sans-serif;
-}
-.numero {
-  font-size: 2.5em;
+  font-size: 4em;
   font-weight: bold;
   color: rgb(10, 0, 95);
   margin-bottom: 20px  ;
@@ -148,7 +153,34 @@ line-height: 90px;
   text-transform: uppercase;
   color: rgb(10, 0, 95);
 }
+
+@media (max-width: 425px) {
+
+  .countdown {
+    background: #ffffff;
+  display: block;
+  gap: 10px;
+  line-height: 60px;
+  font-family: Arial, sans-serif;
 }
+.numero {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: rgb(10, 0, 95);
+  margin-bottom: -30px  ;
+  
+}
+
+.unidad {
+  font-size: 1.5em;
+  margin-top: -0px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(10, 0, 95);
+}
+}
+
 
 /* SECCIONES GENERALES */
 section {
@@ -325,7 +357,7 @@ section h2 {
 .historia p {
   margin: 15px auto;
   max-width: 800px;
-  font-size: 1.2em;
+  font-size: 1.5em;
   line-height: 1.8;
 }
 
@@ -358,7 +390,7 @@ section h2 {
 }
 
 .historia p {
-  font-size: clamp(5px, 4vw, 80px); /* ✅ se adapta entre 24px y 50px */
+  font-size: clamp(20px, 4vw, 80px); /* ✅ se adapta entre 24px y 50px */
   margin: 0 auto 20px auto;
   line-height: 1.2; /* ✅ más equilibrado */
   font-weight: 500;
@@ -840,6 +872,48 @@ button:hover {
   background: rgb(10, 0, 250);
 }
 
+
+
+.resolucion {
+    width: 99%;
+    text-align: center;
+}
+
+
+/**Movil**/
+
+@media (max-width: 767px) {
+    .desktop {
+        display: none;
+    }
+    .tablet {
+        display: none;
+    }
+}
+
+
+/**Tablet**/
+
+@media (min-width: 768px) and (max-width: 990px) {
+    .desktop {
+        display: none;
+    }
+    .movil {
+        display: none;
+    }
+}
+
+
+/**Escritorio**/
+
+@media (min-width: 991px) {
+    .tablet {
+        display: none;
+    }
+    .movil {
+        display: none;
+    }
+}
 
 
 
