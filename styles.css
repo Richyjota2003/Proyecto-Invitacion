@@ -423,7 +423,7 @@ section h2 {
   flex-wrap: wrap;   /* ✅ Permite que bajen en móviles */
   justify-content: center;
   gap: 20px;         /* ✅ Menos separación para evitar desbordes */
-  margin: 10px 0;
+  margin-top: 40px;
   line-height: 20px;
   color: rgb(10, 0, 95);
 }
