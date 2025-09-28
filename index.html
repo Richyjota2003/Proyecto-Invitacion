@@ -169,6 +169,25 @@
     <input type="text" name="nueva-cancion" placeholder="Escribí tu canción aquí" required>
     <button type="submit">Agregar Canción</button>
   </form>
+  <div id="mensaje"></div>
+
+<script>
+document.getElementById("lista-musica-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const form = event.target;
+    const data = new FormData(form);
+
+    fetch("/", {
+        method: "POST",
+        body: data
+    }).then(() => {
+        document.getElementById("mensaje").innerText = "¡Gracias! Tu canción fue enviada.";
+        form.reset();
+    }).catch((error) => {
+        document.getElementById("mensaje").innerText = "Hubo un error. Intenta nuevamente.";
+    });
+});
+</script>
 </section>
 
   <!-- DETALLES DEL EVENTO -->
