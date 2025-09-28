@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Luxurious Roman", serif;
+  
 }
 
 body {
@@ -11,6 +12,7 @@ body {
   color: #f5f5f5;
   background-color: #000000;
   line-height: 3;
+  
 }
 
 
@@ -23,9 +25,21 @@ body {
   justify-content: center;
   text-align: center;
 }
+@media (max-width: 768px) {
+  .portada {
+    background-position: -100px center;
+  }
+}
+
+@media (max-width: 480px) {
+  .portada {
+    background-position: -100px center;
+  }
+}
 
 .overlay {
   position: absolute;
+  display: flex;
   top: 0;
   left: 0;
   width: 100%;
@@ -34,16 +48,18 @@ body {
 }
 
 .contenido-portada {
-  position: relative;
+  position: flex;
   z-index: 1;
   padding: 20px;
   margin-top: 500px;
+  line-height: normal;
 }
 
 .contenido-portada h1 {
     font-family: "Luxurious Roman", serif;
-  font-size: 100px;
-  margin-bottom: -120px;
+  font-size: 80px;
+  line-height: 100px;
+  margin-bottom: 0px;
   font-weight: 500;
   color: #ffffff;
 }
@@ -51,7 +67,8 @@ body {
 .contenido-portada p {
     font-family: "Luxurious Roman", serif;
   font-size: 50px;
-  margin-bottom: -60px;
+  line-height: 100px;
+  margin-bottom: 0px;
   font-weight: 100;
   color: #ffffff;
 }
@@ -69,11 +86,10 @@ body {
     background: #ffffff;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  gap: 10px;
-  margin-top: 0px;
+  gap: 40px;
   font-family: Arial, sans-serif;
 }
+
 
 .contador-item {
      font-family: "Luxurious Roman", serif;
@@ -85,7 +101,7 @@ body {
 }
 
 .numero {
-  font-size: 1.5em;
+  font-size: 2.5em;
   font-weight: bold;
   color: rgb(10, 0, 95);
   margin-bottom: 20px  ;
@@ -93,7 +109,7 @@ body {
 }
 
 .unidad {
-  font-size: 1.0em;
+  font-size: 1.5em;
   margin-top: -50px;
   margin-bottom: 20px;
   font-weight: bold;
@@ -101,6 +117,38 @@ body {
   color: rgb(10, 0, 95);
 }
 
+@media (max-width: 768px) {
+  .countdown {
+    background: #ffffff;
+  display: flex;
+  justify-content: center;
+line-height: 90px;
+  font-family: Arial, sans-serif;
+}
+  .countdown {
+    background: #ffffff;
+  display: block;
+  gap: 10px;
+  line-height: 90px;
+  font-family: Arial, sans-serif;
+}
+.numero {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: rgb(10, 0, 95);
+  margin-bottom: 20px  ;
+  
+}
+
+.unidad {
+  font-size: 1.5em;
+  margin-top: -80px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(10, 0, 95);
+}
+}
 
 /* SECCIONES GENERALES */
 section {
@@ -121,12 +169,23 @@ section h2 {
 /* DETALLES DEL EVENTO */
 .detalles-evento{
   background:  rgb(10, 0, 95);
+  line-height: normal;
+
+
+}
+.detalles-evento h2 {
+  line-height: normal;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+
 }
 
 .detalles-evento p {
-  margin: 0px 0;
+  line-height: normal;
+  margin-top: 0px;
   font-size: 1.2em;
-  line-height: 30px;
+
 }
 
 .detalles-evento iframe {
@@ -140,17 +199,28 @@ section h2 {
 /* GALERÍAS */
 .galeria-previa, .galeria-posterior {
   display: flex;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
   padding: 10px 0;
   background:  rgb(10, 0, 95);
-  font-size: 30px;
+
+}
+.galeria h2 {
+  font-size: clamp(50px, 6vw, 80px); /* ✅ se adapta entre 24px y 50px */
+  margin: 20px auto 20px auto;
+  margin-bottom:20px ;
+  line-height: 1.2; /* ✅ más equilibrado */
+  font-weight: 500;
+  color: #ffffff;
+  text-align: center; /* ✅ siempre centrado */
+  max-width: 90%; /* ✅ evita que se salga en celulares */
+  word-wrap: break-word; /* ✅ por si hay palabras largas */
 }
 
 .galeria-previa img, .galeria-posterior img {
-  width: 300px;
+  width: 200px;
   height: 200px;
   border-radius: 12px;
   object-fit: cover;
@@ -165,6 +235,8 @@ section h2 {
 .galeria-previa img:hover, .galeria-posterior img:hover {
   transform: scale(1.05);
 }
+
+
 
 /* MODAL */
 .modal, .visor {
@@ -223,7 +295,7 @@ section h2 {
 } 
 
 .historia h2 {
-   font-size: 80px;
+   font-size: 50px;
    margin-top: 0px;
   margin-bottom: -10px;
   line-height: 90px;
@@ -243,18 +315,55 @@ section h2 {
   margin-top: 20px;
   border-radius: 12px;
 }
-
-/* RSVP */
-.rsvp{
-background: #ffffff;
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    font-size: 14px;
+  }
 }
 
-.rsvp h2{
-  color: rgb(10, 0, 95);
+@media (max-width: 480px) {
+
+  .historia  {
+    background: rgb(10, 0, 95);
 } 
+.historia h2 {
+  font-size: clamp(50px, 6vw, 80px); /* ✅ se adapta entre 24px y 50px */
+  margin: 0 auto 20px auto;
+  line-height: 1.2; /* ✅ más equilibrado */
+  font-weight: 500;
+  color: #ffffff;
+  text-align: center; /* ✅ siempre centrado */
+  max-width: 90%; /* ✅ evita que se salga en celulares */
+  word-wrap: break-word; /* ✅ por si hay palabras largas */
+}
+
+.historia p {
+  font-size: clamp(5px, 4vw, 80px); /* ✅ se adapta entre 24px y 50px */
+  margin: 0 auto 20px auto;
+  line-height: 1.2; /* ✅ más equilibrado */
+  font-weight: 500;
+  color: #ffffff;
+  text-align: center; /* ✅ siempre centrado */
+  max-width: 90%; /* ✅ evita que se salga en celulares */
+  word-wrap: break-word; /* ✅ por si hay palabras largas */
+}
+}
+
+
+/* RSVP */
+.rsvp {
+  background: #ffffff;
+}
+
+.rsvp h2 {
+  color: rgb(10, 0, 95);
+  text-align: center;
+}
 
 .rsvp form {
   max-width: 500px;
+  width: 100%; /* ✅ Se adapta al ancho de pantalla */
   margin: auto;
   background: rgba(255, 255, 255, 0.05);
   padding: 25px;
@@ -268,15 +377,15 @@ background: #ffffff;
   margin: 10px 0;
   border-radius: 8px;
   border: 2px solid rgb(10, 0, 95);
-    color: rgb(10, 0, 95);
+  color: rgb(10, 0, 95);
 }
 
 .rsvp select {
-  color:  rgb(10, 0, 95);
+  color: rgb(10, 0, 95);
 }
 
 .rsvp button {
-  background:  rgb(10, 0, 95);
+  background: rgb(10, 0, 95);
   color: #ffffff;
   font-weight: bold;
   cursor: pointer;
@@ -284,22 +393,22 @@ background: #ffffff;
 }
 
 .rsvp button:hover {
-  background:  rgb(10, 0, 195);
+  background: rgb(10, 0, 195);
 }
 
+/* Opciones asistencia */
 .opciones-asistencia {
   display: flex;
+  flex-wrap: wrap;   /* ✅ Permite que bajen en móviles */
   justify-content: center;
-  gap: 60px;
+  gap: 20px;         /* ✅ Menos separación para evitar desbordes */
   margin: 10px 0;
   line-height: 20px;
-  max-width: auto;
-  color:  rgb(10, 0, 95);
+  color: rgb(10, 0, 95);
 }
 
 .opciones-asistencia label {
   display: flex;
-  color:  rgb(10, 0, 95);
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
   padding: 10px 15px;
@@ -307,6 +416,10 @@ background: #ffffff;
   cursor: pointer;
   border: 2px solid rgb(10, 0, 95);
   transition: background 0.3s ease;
+  min-width: 120px;   /* ✅ Para que no se achiquen demasiado */
+  justify-content: center;
+  text-align: center;
+  color: rgb(10, 0, 95);
 }
 
 .opciones-asistencia label:hover {
@@ -317,6 +430,14 @@ background: #ffffff;
   margin-right: 8px;
 }
 
+/* 🔹 Ajustes para pantallas chicas */
+@media (max-width: 480px) {
+  .opciones-asistencia {
+    flex-direction: column; /* ✅ se apilan en vertical */
+    gap: 10px;
+  }
+}
+
 /* REGALOS Y TRANSFERENCIAS */
 .regalos-transferencias {
   text-align: center;
@@ -325,11 +446,14 @@ background: #ffffff;
 }
 
 .regalos-transferencias h2 {
-  text-align: center;
- line-height: 50px;
- margin-bottom: 20px;
-  color:rgb(10, 0, 95);
-
+  font-size: clamp(40px, 6vw, 80px); /* ✅ se adapta entre 24px y 50px */
+  margin: 0 auto 20px auto;
+  line-height: 1.2; /* ✅ más equilibrado */
+  font-weight: 500;
+  color:rgb(10, 0, 95); 
+  text-align: center; /* ✅ siempre centrado */
+  max-width: 90%; /* ✅ evita que se salga en celulares */
+  word-wrap: break-word; /* ✅ por si hay palabras largas */
 }
 
 .botones-regalos button {
@@ -408,10 +532,18 @@ background: #ffffff;
   margin: auto;
   color: rgb(10, 0, 95);
   background: #ffffff;
+  line-height: 1.2; /* ✅ más equilibrado */
+  font-weight: 500;
+  color: rgb(10, 0, 95);
+  text-align: center; /* ✅ siempre centrado */
+  max-width: 100%; /* ✅ evita que se salga en celulares */
+  word-wrap: break-word; /* ✅ por si hay palabras largas */
+
 }
 
 .lista-musica h2 {
   color: rgb(10, 0, 95);
+  margin-bottom: 20px;
 }
 .lista-musica input {
   width: 50%;
@@ -470,10 +602,14 @@ background: #ffffff;
 }
 
 .carrusel h2 {
-  color: rgb(255, 255, 255);
-  margin-top: 00px;
-  margin-bottom: -20px;
-  font-size: 50px;
+ font-size: clamp(50px, 4vw, 80px); /* ✅ se adapta entre 24px y 50px */
+  margin: 0 auto 20px auto;
+  line-height: 1.2; /* ✅ más equilibrado */
+  font-weight: 500;
+  color: #ffffff;
+  text-align: center; /* ✅ siempre centrado */
+  max-width: 90%; /* ✅ evita que se salga en celulares */
+  word-wrap: break-word; /* ✅ por si hay palabras largas */
 }
 
 .slider-container {
@@ -568,7 +704,7 @@ background: #ffffff;
 
 
 
-.footer {
+ .footer {
   background: rgb(10, 0, 95);
   padding: 20px;
   text-align: center;
@@ -576,12 +712,12 @@ background: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px; /* espacio entre logo y copy */
+  gap: 10px; 
 }
 
 .footer-logo img {
   display: block;
-  max-height: 180px; /* tamaño máximo del logo */
+  max-height: 180px; 
   height: auto;
   width: auto;
   margin-top: -50px;
@@ -598,15 +734,16 @@ background: #ffffff;
   background: rgb(10, 0, 95);
   padding: 10px 20px;
   width: 100%;
-  height: 70px; /* Altura fija */
+  height: 70px; 
   display: flex;
-  align-items: center; /* Centra verticalmente el logo */
+  align-items: center; 
 }
 
 .logo-superior img {
   margin-top: 30px;
-  height: 150px; /* Altura del logo, menor o igual que la del header */
-}
+  height: 150px; 
+} 
+
 @keyframes abrirModalRegalo {
   0% {
     opacity: 0;
