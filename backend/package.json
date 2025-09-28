@@ -4,8 +4,8 @@
   "description": "Backend para RSVP y lista de música",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
-  },
+  "start": "node backend/server.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
