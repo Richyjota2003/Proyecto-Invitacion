@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
 const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
 const nodemailer = require("nodemailer");
@@ -10,8 +9,13 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Ruta raíz de prueba
+app.get("/", (req, res) => {
+  res.send("Servidor funcionando ✅");
+});
 
 // Crear base de datos SQLite
 const db = new sqlite3.Database("./formulario.db", (err) => {
@@ -43,7 +47,7 @@ db.serialize(() => {
   console.log("Tablas creadas o ya existentes.");
 });
 
-// Configurar el transportador de email
+// Configurar Nodemailer
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -52,7 +56,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Función para enviar un email con datos individuales
+// Función para enviar email
 function enviarEmailIndividual(asunto, mensaje) {
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -67,7 +71,7 @@ function enviarEmailIndividual(asunto, mensaje) {
   });
 }
 
-// Guardar datos del formulario RSVP
+// Guardar RSVP
 app.post("/rsvp", (req, res) => {
   const { nombre, apellido, asistencia, comida } = req.body;
 
@@ -89,7 +93,7 @@ app.post("/rsvp", (req, res) => {
   );
 });
 
-// Guardar datos de la lista de música
+// Guardar Lista de Música
 app.post("/lista-musica", (req, res) => {
   const { cancion } = req.body;
 
@@ -111,6 +115,7 @@ app.post("/lista-musica", (req, res) => {
   );
 });
 
+// Iniciar servidor
 app.listen(PORT, () => {
   console.log(`Servidor iniciado en puerto ${PORT}`);
 });
