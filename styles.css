@@ -18,7 +18,7 @@ body {
 
 .portada {
   position: relative;
-  height: 90vh;
+  height: 80vh;
   background: url('/Source/DSC_0014.jpg') center center/cover no-repeat;
   display: flex;
   align-items: center;
@@ -87,6 +87,7 @@ body {
 
   .contenido-portada p {
     font-size: clamp(40px, 4vw, 90px); /* ajustar valores */
+    margin-bottom: -1.5vh;
   }
 
   .fecha-evento {
@@ -105,16 +106,17 @@ body {
   }
   
   .contenido-portada h1 {
-    font-size: clamp(50px, 8vw, 200px); /* ajustar el valor relativo */
+    font-size: clamp(60px, 8vw, 300px); /* ajustar el valor relativo */
     margin-bottom: 2vh;
   }
 
   .contenido-portada p {
-    font-size: clamp(20px, 4vw, 80px); /* ajustar valores */
+    font-size: clamp(35px, 4vw, 80px); /* ajustar valores */
+    margin-bottom: -1.5vh;
   }
 
   .fecha-evento {
-    font-size: clamp(15px, 3vw, 60px); /* ajustar valores */
+    font-size: clamp(25px, 3vw, 60px); /* ajustar valores */
   }
   
 }
@@ -267,19 +269,19 @@ section h2 {
   .galeria-previa, .galeria-posterior {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around; /* separa las imágenes */
     gap: 10px;
   }
 
   .galeria-previa img, .galeria-posterior img {
-    width: calc(50% - 20px); /* Dos imágenes por fila */
-    aspect-ratio: 1 / 1; /* Mantiene mismo ancho y alto */
-    object-fit: cover; /* Recorta sin deformar */
+    width: calc(45% - 20px); /* deja espacio entre ellas */
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    box-shadow: 0 20px 20px rgba(0,0,0,0.6);
     cursor: pointer;
     transition: transform 0.3s ease;
-    margin: 10px 0;
+    margin: 10px -30;
   }
 }
 
