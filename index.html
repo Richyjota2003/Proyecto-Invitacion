@@ -225,7 +225,25 @@ document.getElementById("lista-musica-form").addEventListener("submit", function
   <button type="submit">Confirmar</button>
 </form>
     
-    <div id="respuesta-rsvp"></div>
+    <div id="mensaje-rsvp"></div>
+
+  <script>
+    document.getElementById("rsvp-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const form = event.target;
+      const data = new FormData(form);
+
+      fetch("/", {
+        method: "POST",
+        body: data
+      }).then(() => {
+        document.getElementById("mensaje-rsvp").innerText = "¡Gracias! Tu respuesta fue enviada.";
+        form.reset();
+      }).catch((error) => {
+        document.getElementById("mensaje-rsvp").innerText = "Hubo un error. Intenta nuevamente.";
+      });
+    });
+  </script>
   </section>
 
   <!-- MÚSICA -->
