@@ -163,29 +163,32 @@
   <h2>Lista de Música</h2>
   <p>¿Qué canción no puede faltar?</p>
 
-  <form name="lista-musica" method="POST" data-netlify="true">
-    <input type="hidden" name="form-name" value="lista-musica">
-
-    <input type="text" name="nueva-cancion" placeholder="Escribí tu canción aquí" required>
+  <form id="form-musica">
+    <input type="text" name="cancion" id="nueva-cancion" placeholder="Escribí tu canción aquí" required>
     <button type="submit">Agregar Canción</button>
   </form>
-  <div id="mensaje"></div>
 
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
-document.getElementById("lista-musica-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const form = event.target;
-    const data = new FormData(form);
+(function(){
+  emailjs.init("TU_USER_ID"); // tu user_id de EmailJS
+})();
 
-    fetch("/", {
-        method: "POST",
-        body: data
-    }).then(() => {
-        document.getElementById("mensaje").innerText = "¡Gracias! Tu canción fue enviada.";
-        form.reset();
-    }).catch((error) => {
-        document.getElementById("mensaje").innerText = "Hubo un error. Intenta nuevamente.";
-    });
+document.getElementById("form-musica").addEventListener("submit", function(event){
+  event.preventDefault(); // evitar recargar página
+
+  const cancion = document.getElementById("nueva-cancion").value;
+
+  emailjs.send("TU_SERVICE_ID", "TU_TEMPLATE_ID", {
+    cancion: cancion
+  }).then(function(response) {
+    console.log("Éxito!", response.status, response.text);
+    alert("Tu canción ha sido enviada!");
+    document.getElementById("form-musica").reset();
+  }, function(error) {
+    console.log("Error...", error);
+    alert("Hubo un error, intenta de nuevo.");
+  });
 });
 </script>
 </section>
