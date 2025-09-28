@@ -164,7 +164,6 @@
   <p>¿Qué canción no puede faltar?</p>
 
   <form name="lista-musica" method="POST" data-netlify="true">
-    <!-- Campo oculto obligatorio -->
     <input type="hidden" name="form-name" value="lista-musica">
 
     <input type="text" name="nueva-cancion" placeholder="Escribí tu canción aquí" required>
@@ -184,9 +183,8 @@
   <!-- RSVP -->
   <section class="rsvp">
     <h2>Confirmar Asistencia</h2>
-    <form id="form-rsvp" name="contacto" method="POST" data-netlify="true">
-  <!-- Campo oculto obligatorio para Netlify -->
-  <input type="hidden" name="form-name" value="contacto">
+<form name="rsvp" method="POST" data-netlify="true">
+  <input type="hidden" name="form-name" value="rsvp">
 
   <input type="text" name="nombre" placeholder="Nombre" required>
   <input type="text" name="apellido" placeholder="Apellido" required>
@@ -206,7 +204,7 @@
   </select>
 
   <button type="submit">Confirmar</button>
-</form>>
+</form>
     
     <div id="respuesta-rsvp"></div>
   </section>
