@@ -177,7 +177,7 @@
 
       const cancion = e.target.cancion.value; // nombre exacto del input
 
-      fetch("https://invitacion-proyect.onrender.com", {
+      fetch("https://invitacion-proyect.onrender.com/lista-musica", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cancion }) // debe coincidir con backend
@@ -241,7 +241,7 @@
       const asistencia = e.target.asistencia.value;
       const comida = e.target.comida.value;
 
-      fetch("https://invitacion-proyect.onrender.com", {
+      fetch("https://invitacion-proyect.onrender.com/rsvp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, apellido, asistencia, comida })
