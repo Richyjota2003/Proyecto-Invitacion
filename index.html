@@ -227,7 +227,6 @@ document.getElementById("form-regalo").addEventListener("submit", function(e) {
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1046.6685134475986!2d-64.14077745750546!3d-31.383593610607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x943297f3126c0409%3A0x3fc4d4932b87ec04!2sShe!5e1!3m2!1ses-419!2sar!4v1758932240957!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </section>
 
-  <!-- RSVP -->
 <!-- RSVP -->
 <section class="rsvp">
   <h2>Confirmar Asistencia</h2>
@@ -254,33 +253,28 @@ document.getElementById("form-regalo").addEventListener("submit", function(e) {
 
   <div id="respuesta-rsvp"></div>
 
-<!-- <script>
-document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("respuesta-rsvp").innerText = "";
+  <script>
+    document.getElementById("form-rsvp").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-  document.getElementById("form-rsvp").addEventListener("submit", function (e) {
-    e.preventDefault();
+      const nombre = e.target.nombre.value;
+      const apellido = e.target.apellido.value;
+      const asistencia = e.target.asistencia.value;
+      const comida = e.target.comida.value;
 
-    const nombre = e.target.nombre.value;
-    const apellido = e.target.apellido.value;
-    const asistencia = e.target.asistencia.value;
-    const comida = e.target.comida.value;
-
-    fetch("https://invitacion-proyect.onrender.com/rsvp", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nombre, apellido, asistencia, comida })
-    })
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("respuesta-rsvp").innerText = "Asistencia confirmada ✅";
-      e.target.reset();
-    })
-    .catch(err => console.error(err));
-  });
-});
-</script> -->
-
+      fetch("https://invitacion-proyect.onrender.com/rsvp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, apellido, asistencia, comida })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("respuesta-rsvp").innerText = "Asistencia confirmada ✅";
+        e.target.reset();
+      })
+      .catch(err => console.error(err));
+    });
+  </script>
 </section>
 
 
