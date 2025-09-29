@@ -573,6 +573,10 @@ section h2 {
   box-shadow: 0 12px 25px rgba(0,0,0,0.6);
 }
 
+#form-regalo input {
+  color: rgb(10, 0, 95);
+}
+
 /* LISTA DE MÚSICA */
 .lista-musica {
   max-width: 100%;
