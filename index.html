@@ -255,25 +255,26 @@ document.getElementById("form-regalo").addEventListener("submit", function(e) {
   <div id="respuesta-rsvp"></div>
 
 <script>
-document.getElementById("form-rsvp").addEventListener("submit", function (e) {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("form-rsvp").addEventListener("submit", function (e) {
+    e.preventDefault(); // previene el mensaje por defecto
+    const nombre = e.target.nombre.value;
+    const apellido = e.target.apellido.value;
+    const asistencia = e.target.asistencia.value;
+    const comida = e.target.comida.value;
 
-  const nombre = e.target.nombre.value;
-  const apellido = e.target.apellido.value;
-  const asistencia = e.target.asistencia.value;
-  const comida = e.target.comida.value;
-
-  fetch("https://invitacion-proyect.onrender.com/rsvp", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nombre, apellido, asistencia, comida })
-  })
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("respuesta-rsvp").innerText = "Asistencia confirmada ✅";
-    e.target.reset();
-  })
-  .catch(err => console.error(err));
+    fetch("https://invitacion-proyect.onrender.com/rsvp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nombre, apellido, asistencia, comida })
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("respuesta-rsvp").innerText = "Asistencia confirmada ✅";
+      e.target.reset();
+    })
+    .catch(err => console.error(err));
+  });
 });
 </script>
 </section>
