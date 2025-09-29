@@ -59,11 +59,11 @@ async function enviarEmailIndividual(asunto, mensaje) {
              </div>`,
     });
 
-    console.log("Email enviado ✅", email.id);
-    return email.id;
+    console.log("Email enviado ✅", email); // mostrar todo
+    return email;
   } catch (error) {
     console.error("Error enviando email:", error);
-    return null;
+    throw error;
   }
 }
 
