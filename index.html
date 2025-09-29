@@ -118,6 +118,28 @@
     <div id="respuesta-regalo" style="margin-top:10px; font-weight:bold;"></div>
   </div>
 </div>
+<script>
+document.getElementById("form-regalo").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const nombre = e.target.nombre.value;
+  const email = e.target.email.value;
+  const mensaje = e.target.mensaje.value;
+  const regalo = e.target.regalo.value;
+
+  fetch("https://invitacion-proyect.onrender.com/regalos", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nombre, email, mensaje, regalo })
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("respuesta-regalo").innerHTML = "Regalo confirmado ✅";
+    e.target.reset();
+  })
+  .catch(err => console.error(err));
+});
+</script>
 
   <!-- GALERÍA -->
   <section class="galeria-previa">

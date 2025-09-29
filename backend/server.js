@@ -137,3 +137,31 @@ app.get("/test-email", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor iniciado en puerto ${PORT}`);
 });
+
+// ================= REGALOS =================
+app.post("/regalos", (req, res) => {
+  const { nombre, email, mensaje, regalo } = req.body;
+
+  if (!nombre || !email || !regalo) {
+    return res.status(400).json({ error: "Faltan datos obligatorios" });
+  }
+
+  const mensajeEmail = `
+    Nuevo regalo confirmado 🎁:<br>
+    <strong>Nombre:</strong> ${nombre}<br>
+    <strong>Email:</strong> ${email}<br>
+    <strong>Regalo:</strong> ${regalo}<br>
+    <strong>Mensaje:</strong> ${mensaje || "Sin mensaje"}
+  `;
+
+  enviarEmailIndividual("Nuevo Regalo Confirmado", mensajeEmail)
+    .then(() => {
+      console.log("Regalo enviado ✅");
+      res.json({ success: true, mensaje: "Regalo enviado correctamente" });
+    })
+    .catch((error) => {
+      console.error("Error enviando email:", error);
+      res.status(500).json({ error: "Error enviando email" });
+    });
+});
+

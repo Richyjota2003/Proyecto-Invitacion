@@ -891,6 +891,9 @@ button:hover {
     text-align: center;
 }
 
+#respuesta-rsvp {
+  color:rgb(10, 0, 95);
+}
 
 /**Movil**/
 
