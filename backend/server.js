@@ -91,7 +91,7 @@ app.post("/rsvp", (req, res) => {
         return res.status(500).json({ error: "Error enviando email" });
       }
 
-      res.json({ success: true, id: this.lastID });
+
     }
   );
 });
