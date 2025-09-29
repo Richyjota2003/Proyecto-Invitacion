@@ -46,12 +46,16 @@ db.serialize(() => {
 });
 
 // ================= RESEND EMAIL =================
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const EMAIL_FROM = process.env.EMAIL_FROM;
+const EMAIL_TO = process.env.EMAIL_TO;
+
+const resend = new Resend(RESEND_API_KEY);
 
 async function enviarEmailIndividual(asunto, mensaje) {
   const email = await resend.emails.send({
     from: EMAIL_FROM,
-    to: process.env.EMAIL_TO,
+    to: EMAIL_TO,
     subject: asunto,
     html: `<div style="font-size:16px; font-family:Arial, sans-serif; color:#000;">
             ${mensaje}
@@ -59,7 +63,6 @@ async function enviarEmailIndividual(asunto, mensaje) {
   });
   console.log("Email enviado ✅", email);
 }
-
 
 // ================= RUTAS =================
 app.post("/rsvp", (req, res) => {
