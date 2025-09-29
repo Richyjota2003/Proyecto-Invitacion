@@ -193,29 +193,25 @@ document.getElementById("form-regalo").addEventListener("submit", function(e) {
 
   <div id="respuesta-musica"></div>
 
-<script>
-document.getElementById("form-rsvp").addEventListener("submit", function(e) {
-  e.preventDefault();
+  <script>
+    document.getElementById("lista-musica-form").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-  const nombre = e.target.nombre.value;
-  const apellido = e.target.apellido.value;
-  const asistencia = e.target.asistencia.value;
-  const comida = e.target.comida.value;
+      const cancion = e.target.cancion.value; // nombre exacto del input
 
-  fetch("https://invitacion-proyect.onrender.com/rsvp", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nombre, apellido, asistencia, comida })
-  })
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("respuesta-rsvp").innerText = "Asistencia confirmada ✅";
-    e.target.reset();
-  })
-  .catch(err => console.error(err));
-});
-</script>
-
+      fetch("https://invitacion-proyect.onrender.com/lista-musica", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cancion }) // debe coincidir con backend
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("respuesta-musica").innerText = "Canción agregada ✅";
+        e.target.reset();
+      })
+      .catch(err => console.error(err));
+    });
+  </script>
 </section>
 
 
@@ -260,11 +256,11 @@ document.getElementById("form-rsvp").addEventListener("submit", function(e) {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const formRsvp = document.getElementById("form-rsvp");
-  const respuestaRsvp = document.getElementById("respuesta-rsvp");
+  document.getElementById("respuesta-rsvp").innerText = "";
 
-  formRsvp.addEventListener("submit", function (e) {
+  document.getElementById("form-rsvp").addEventListener("submit", function (e) {
     e.preventDefault();
+
     const nombre = e.target.nombre.value;
     const apellido = e.target.apellido.value;
     const asistencia = e.target.asistencia.value;
@@ -277,13 +273,14 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then(res => res.json())
     .then(data => {
-      respuestaRsvp.innerText = "Asistencia confirmada ✅";
-      formRsvp.reset();
+      document.getElementById("respuesta-rsvp").innerText = "Asistencia confirmada ✅";
+      e.target.reset();
     })
     .catch(err => console.error(err));
   });
 });
 </script>
+
 </section>
 
 
