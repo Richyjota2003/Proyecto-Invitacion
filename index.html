@@ -256,8 +256,12 @@ document.getElementById("form-regalo").addEventListener("submit", function(e) {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("form-rsvp").addEventListener("submit", function (e) {
-    e.preventDefault(); // previene el mensaje por defecto
+  const formRsvp = document.getElementById("form-rsvp");
+  const respuestaRsvp = document.getElementById("respuesta-rsvp");
+
+  formRsvp.addEventListener("submit", function (e) {
+    e.preventDefault(); // ⚡ Esto evita el mensaje predeterminado del navegador
+
     const nombre = e.target.nombre.value;
     const apellido = e.target.apellido.value;
     const asistencia = e.target.asistencia.value;
@@ -268,12 +272,12 @@ document.addEventListener("DOMContentLoaded", function () {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nombre, apellido, asistencia, comida })
     })
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("respuesta-rsvp").innerText = "Asistencia confirmada ✅";
-      e.target.reset();
-    })
-    .catch(err => console.error(err));
+      .then(res => res.json())
+      .then(data => {
+        respuestaRsvp.innerText = "Asistencia confirmada ✅";
+        formRsvp.reset();
+      })
+      .catch(err => console.error(err));
   });
 });
 </script>
