@@ -1,11 +1,13 @@
 require("dotenv").config();
 const express = require("express");
-const fs = require("fs");
+const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
+const { Resend } = require("resend");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// ================= MIDDLEWARE =================
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -14,63 +16,128 @@ app.get("/", (req, res) => {
   res.send("Servidor funcionando ✅");
 });
 
-app.post("/rsvp", (req, res) => {
-  const { nombre, apellido, asistencia, comida } = req.body;
-  const registro = { nombre, apellido, asistencia, comida, fecha: new Date() };
-
-  fs.readFile("rsvps.json", "utf8", (err, data) => {
-    let rsvps = [];
-    if (!err) rsvps = JSON.parse(data);
-
-    rsvps.push(registro);
-
-    fs.writeFile("rsvps.json", JSON.stringify(rsvps, null, 2), (err) => {
-      if (err) return res.status(500).json({ error: "Error guardando RSVP" });
-
-      console.log("RSVP guardado:", registro);
-      res.json({ success: true });
-    });
-  });
+// ================= BASE DE DATOS =================
+const db = new sqlite3.Database("./formulario.db", (err) => {
+  if (err) console.error("Error DB:", err.message);
+  else console.log("Conectado a la base de datos SQLite.");
 });
 
-app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));
+db.serialize(() => {
+  db.run(`
+    CREATE TABLE IF NOT EXISTS rsvp (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nombre TEXT,
+      apellido TEXT,
+      asistencia TEXT,
+      comida TEXT,
+      fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
 
+  db.run(`
+    CREATE TABLE IF NOT EXISTS lista_musica (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      cancion TEXT,
+      fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
 
-require("dotenv").config();
-const nodemailer = require("nodemailer");
-const fs = require("fs");
+  console.log("Tablas creadas o ya existentes.");
+});
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+// ================= RESEND EMAIL =================
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+async function enviarEmailIndividual(asunto, mensaje) {
+  try {
+    const email = await resend.emails.send({
+      from: process.env.EMAIL_FROM,
+      to: process.env.EMAIL_TO,
+      subject: asunto,
+      html: `<div style="font-size:16px; font-family:Arial, sans-serif; color:#000;">
+              ${mensaje}
+             </div>`,
+    });
+
+    console.log("Email enviado ✅", email.id);
+    return email.id;
+  } catch (error) {
+    console.error("Error enviando email:", error);
+    return null;
+  }
+}
+
+// ================= RUTAS =================
+app.post("/rsvp", (req, res) => {
+  const { nombre, apellido, asistencia, comida } = req.body;
+
+  db.run(
+    `INSERT INTO rsvp (nombre, apellido, asistencia, comida) VALUES (?, ?, ?, ?)`,
+    [nombre, apellido, asistencia, comida],
+    async function (err) {
+      if (err) {
+        console.error("Error al guardar RSVP:", err.message);
+        return res.status(500).json({ error: err.message });
+      }
+
+      console.log("RSVP guardado con ID:", this.lastID);
+
+      const mensaje = `
+        Nuevo RSVP:<br>
+        Nombre: ${nombre} ${apellido}<br>
+        Asistencia: ${asistencia}<br>
+        Comida: ${comida}
+      `;
+
+      try {
+        await enviarEmailIndividual("Nuevo RSVP", mensaje);
+      } catch (error) {
+        return res.status(500).json({ error: "Error enviando email" });
+      }
+
+      res.json({ success: true, id: this.lastID });
+    }
+  );
+});
+
+app.post("/lista-musica", (req, res) => {
+  const { cancion } = req.body;
+
+  db.run(
+    `INSERT INTO lista_musica (cancion) VALUES (?)`,
+    [cancion],
+    async function (err) {
+      if (err) {
+        console.error("Error al guardar canción:", err.message);
+        return res.status(500).json({ error: err.message });
+      }
+
+      console.log("Canción guardada con ID:", this.lastID);
+
+      const mensaje = `Nueva canción añadida: ${cancion}`;
+
+      try {
+        await enviarEmailIndividual("Nueva Canción", mensaje);
+      } catch (error) {
+        return res.status(500).json({ error: "Error enviando email" });
+      }
+
+      res.json({ success: true, id: this.lastID });
+    }
+  );
+});
+
+// ================= RUTA DE PRUEBA =================
+app.get("/test-email", async (req, res) => {
+  try {
+    await enviarEmailIndividual("Prueba", "Este es un email de prueba desde Resend.");
+    res.send("Email de prueba enviado ✅");
+  } catch (err) {
+    res.status(500).send("Error enviando email");
   }
 });
 
-fs.readFile("rsvps.json", "utf8", async (err, data) => {
-  if (err) return console.error("Error leyendo archivo:", err);
-
-  const rsvps = JSON.parse(data);
-  const ultimo = rsvps[rsvps.length - 1]; // tomar el último RSVP
-
-  const mensaje = `
-    Nuevo RSVP:<br>
-    Nombre: ${ultimo.nombre} ${ultimo.apellido}<br>
-    Asistencia: ${ultimo.asistencia}<br>
-    Comida: ${ultimo.comida}<br>
-    Fecha: ${ultimo.fecha}
-  `;
-
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_TO,
-    subject: "Nuevo RSVP",
-    html: mensaje
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) console.error("Error enviando email:", error);
-    else console.log("Email enviado:", info.response);
-  });
+// ================= SERVIDOR =================
+app.listen(PORT, () => {
+  console.log(`Servidor iniciado en puerto ${PORT}`);
 });
