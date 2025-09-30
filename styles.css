@@ -790,11 +790,11 @@ section h2 {
 
 .footer-logo img {
   display: block;
-  max-height: 180px; 
+  max-height: 100px; 
   height: auto;
   width: auto;
   margin-top: -30px;
-  margin-bottom: -50px;
+  margin-bottom: 0px;
 }
 
 .copy {
