@@ -100,9 +100,11 @@ body {
 
 
 
+
+
 @media screen and (max-width: 768px) {
   .contenido-portada {
-    margin-top: 60vh;
+    margin-top: 50vh;
   }
   
   .contenido-portada h1 {
@@ -120,6 +122,51 @@ body {
   }
   
 }
+
+@media screen and (max-width: 640px) {
+  .contenido-portada {
+    margin-top: 40vh;
+  }
+  
+  .contenido-portada h1 {
+    font-size: clamp(60px, 8vw, 300px); /* ajustar el valor relativo */
+    margin-bottom: 2vh;
+  }
+
+  .contenido-portada p {
+    font-size: clamp(35px, 4vw, 80px); /* ajustar valores */
+    margin-bottom: -1.5vh;
+  }
+
+  .fecha-evento {
+    font-size: clamp(25px, 3vw, 60px); /* ajustar valores */
+  }
+  
+}
+
+@media screen and (max-width: 360px) {
+  .contenido-portada {
+    margin-top: 50vh;
+  }
+  
+  .contenido-portada h1 {
+    font-size: clamp(60px, 8vw, 300px); /* ajustar el valor relativo */
+    margin-bottom: 2vh;
+  }
+
+  .contenido-portada p {
+    font-size: clamp(35px, 4vw, 80px); /* ajustar valores */
+    margin-bottom: -1.5vh;
+  }
+
+  .fecha-evento {
+    font-size: clamp(25px, 3vw, 60px); /* ajustar valores */
+  }
+  
+}
+
+
+
 
 .countdown {
     background: #ffffff;
@@ -156,6 +203,33 @@ body {
   color: rgb(10, 0, 95);
 }
 
+@media (max-width: 640px) {
+
+  .countdown {
+    background: #ffffff;
+  display: block;
+  gap: 10px;
+  line-height: 60px;
+  font-family: Arial, sans-serif;
+}
+.numero {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: rgb(10, 0, 95);
+  margin-bottom: -30px  ;
+  
+}
+
+.unidad {
+  font-size: 1.0em;
+  margin-top: -0px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(10, 0, 95);
+}
+}
+
 @media (max-width: 425px) {
 
   .countdown {
@@ -182,6 +256,7 @@ body {
   color: rgb(10, 0, 95);
 }
 }
+
 
 
 /* SECCIONES GENERALES */
@@ -790,11 +865,11 @@ section h2 {
 
 .footer-logo img {
   display: block;
-  max-height: 100px; 
+  max-height: 120px; 
   height: auto;
   width: auto;
-  margin-top: -30px;
-  margin-bottom: 0px;
+  margin-top: -0px;
+  margin-bottom: -10px;
 }
 
 .copy {
@@ -810,12 +885,31 @@ section h2 {
   height: 70px; 
   display: flex;
   align-items: center; 
+  justify-content: space-between; /* 🔹 separa logo y botón */
 }
 
 .logo-superior img {
   margin-top: 25px;
-  height: 110px; 
-} 
+  height: 80px; 
+}
+
+.header-superior button {
+  margin-left: auto;          /* lo empuja totalmente a la derecha */
+  background: rgb(10, 0, 95);
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header-superior button:hover {
+  background: #fff;
+  color: rgb(10, 0, 95);
+  transform: scale(1.05);
+}
 
 @keyframes abrirModalRegalo {
   0% {
