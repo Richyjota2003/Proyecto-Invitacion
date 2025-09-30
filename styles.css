@@ -793,7 +793,7 @@ section h2 {
   max-height: 180px; 
   height: auto;
   width: auto;
-  margin-top: -50px;
+  margin-top: -30px;
   margin-bottom: -50px;
 }
 
@@ -813,8 +813,8 @@ section h2 {
 }
 
 .logo-superior img {
-  margin-top: 30px;
-  height: 150px; 
+  margin-top: 25px;
+  height: 110px; 
 } 
 
 @keyframes abrirModalRegalo {
@@ -935,7 +935,16 @@ button:hover {
     }
 }
 
+.imagenes img {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
 
+.imagenes img.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 
 

@@ -19,7 +19,7 @@
   <!-- PORTADA -->
   <header class="header-superior">
     <div class="logo-superior">
-      <img src="/Source/Logotipo de Invitaciones Web.png" alt="Logo superior"
+      <img src="/Source/Logo.png" alt="Logo superior"
     </div>
   </header>
 
@@ -167,6 +167,21 @@ document.getElementById("form-regalo").addEventListener("submit", function(e) {
       <img src="/Source/19.jpg" alt="Foto previa 19">
       <img src="/Source/20.jpg" alt="Foto previa 20">
     </div>
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll("img").forEach(img => {
+  observer.observe(img);
+});
+
+      </script>
   </section>
 
   <!-- MODAL -->
@@ -307,6 +322,7 @@ document.getElementById("form-regalo").addEventListener("submit", function(e) {
     </div>
     <button class="flecha derecha">&#10095;</button>
   </div>
+  
 </section>
 
 <div id="visorCarrusel" class="visor">
@@ -316,7 +332,7 @@ document.getElementById("form-regalo").addEventListener("submit", function(e) {
 
   <footer class="footer">
     <div class="footer-logo">
-      <img src="/Source/Logotipo de Invitaciones Web.png" alt="Logo inferior">
+      <img src="/Source/Logo.png" alt="Logo inferior">
     </div>
     <p class="copy">© 2025 Joel Lujan. Todos los derechos reservados.</p>
   </footer>
