@@ -80,15 +80,30 @@ app.post("/rsvp", (req, res) => {
 
 // Lista música
 app.post("/lista-musica", (req, res) => {
+  console.log("[LOG] /lista-musica llamada:", req.body);
+
   const { cancion } = req.body;
+  if (!cancion) return res.status(400).json({ error: "Campo 'cancion' requerido" });
+
   db.run(
     `INSERT INTO lista_musica (cancion) VALUES (?)`,
     [cancion],
     async function (err) {
-      if (err) return res.status(500).json({ error: err.message });
+      if (err) {
+        console.error("[ERROR] Guardar canción:", err.message);
+        return res.status(500).json({ error: err.message });
+      }
+      console.log("[LOG] Canción guardada con ID:", this.lastID);
+
       const mensaje = `<strong>Nueva canción añadida:</strong> ${cancion}`;
-      try { await enviarEmail("Nueva Canción", mensaje); }
-      catch (error) { return res.status(500).json({ error: "Error enviando email" }); }
+      try {
+        console.log("[LOG] Enviando email de canción...");
+        await enviarEmail("Nueva Canción", mensaje);
+        console.log("[LOG] Email canción enviado ✅");
+      } catch (error) {
+        console.error("[ERROR] Enviando email canción:", error);
+        return res.status(500).json({ error: "Error enviando email" });
+      }
       res.json({ success: true, id: this.lastID });
     }
   );
@@ -96,15 +111,30 @@ app.post("/lista-musica", (req, res) => {
 
 // Regalos
 app.post("/regalos", (req, res) => {
+  console.log("[LOG] /regalos llamada:", req.body);
+
   const { nombre, email, mensaje, regalo } = req.body;
+  if (!regalo || !nombre || !email) return res.status(400).json({ error: "Campos requeridos: regalo, nombre, email" });
+
   db.run(
     `INSERT INTO regalos (regalo, nombre, email, mensaje) VALUES (?, ?, ?, ?)`,
     [regalo, nombre, email, mensaje],
     async function (err) {
-      if (err) return res.status(500).json({ error: err.message });
+      if (err) {
+        console.error("[ERROR] Guardar regalo:", err.message);
+        return res.status(500).json({ error: err.message });
+      }
+      console.log("[LOG] Regalo guardado con ID:", this.lastID);
+
       const emailMensaje = `<strong>Nuevo regalo confirmado:</strong><br>Regalo: ${regalo}<br>Nombre: ${nombre}<br>Email: ${email}<br>Mensaje: ${mensaje || "Sin mensaje"}`;
-      try { await enviarEmail("Nuevo Regalo Confirmado", emailMensaje); }
-      catch (error) { return res.status(500).json({ error: "Error enviando email" }); }
+      try {
+        console.log("[LOG] Enviando email regalo...");
+        await enviarEmail("Nuevo Regalo Confirmado", emailMensaje);
+        console.log("[LOG] Email regalo enviado ✅");
+      } catch (error) {
+        console.error("[ERROR] Enviando email regalo:", error);
+        return res.status(500).json({ error: "Error enviando email" });
+      }
       res.json({ success: true, id: this.lastID });
     }
   );
