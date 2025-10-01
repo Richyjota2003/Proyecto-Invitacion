@@ -42,6 +42,9 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS regalos (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       regalo TEXT,
+      nombre TEXT,
+      email TEXT,
+      mensaje TEXT,
       fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `);
@@ -72,6 +75,7 @@ async function enviarEmail(asunto, mensaje) {
 
 // ===== Rutas =====
 
+// RSVP
 app.post("/rsvp", (req, res) => {
   const { nombre, apellido, asistencia, comida } = req.body;
 
@@ -105,6 +109,7 @@ app.post("/rsvp", (req, res) => {
   );
 });
 
+// Lista música
 app.post("/lista-musica", (req, res) => {
   const { cancion } = req.body;
 
@@ -133,13 +138,13 @@ app.post("/lista-musica", (req, res) => {
   );
 });
 
-// ===== NUEVA ruta para regalos =====
+// Regalos
 app.post("/regalos", (req, res) => {
   const { nombre, email, mensaje, regalo } = req.body;
 
   db.run(
-    `INSERT INTO regalos (regalo) VALUES (?)`,
-    [regalo],
+    `INSERT INTO regalos (regalo, nombre, email, mensaje) VALUES (?, ?, ?, ?)`,
+    [regalo, nombre, email, mensaje],
     async function (err) {
       if (err) {
         console.error("Error al guardar regalo:", err.message);
@@ -168,9 +173,39 @@ app.post("/regalos", (req, res) => {
   );
 });
 
-
+// Ping
 app.get("/ping", (req, res) => {
   res.status(200).send("pong ✅");
+});
+
+// Test email
+app.get("/test-email", async (req, res) => {
+  try {
+    await enviarEmail("Email de prueba Sendinblue", "Esto es un correo de prueba desde Nodemailer con Brevo.");
+    res.send("Email de prueba enviado ✅");
+  } catch (err) {
+    console.error("Error enviando email:", err);
+    res.status(500).send("Error enviando email");
+  }
+});
+
+// Estado
+app.get("/status", async (req, res) => {
+  try {
+    const smtpStatus = await new Promise((resolve) => {
+      transporter.verify((error) => {
+        resolve(error ? false : true);
+      });
+    });
+
+    res.json({
+      server: "online ✅",
+      smtp: smtpStatus ? "conectado ✅" : "fallando ❌",
+      time: new Date().toISOString()
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // ===== Servidor =====
