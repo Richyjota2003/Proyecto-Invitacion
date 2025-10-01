@@ -52,7 +52,7 @@ const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
 async function enviarEmail(asunto, mensaje) {
   let sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
-  sendSmtpEmail.sender = { name: "Invitaciones Elyon", email: process.env.SENDINBLUE_USER };
+sendSmtpEmail.sender = { name: "Invitaciones Elyon", email: "contacto@passionjuvenil.com" };
   sendSmtpEmail.to = [{ email: process.env.SENDINBLUE_TO }];
   sendSmtpEmail.subject = asunto;
   sendSmtpEmail.htmlContent = `<div style="font-family:Arial; font-size:16px;">${mensaje}</div>`;
