@@ -209,6 +209,10 @@ app.get("/status", async (req, res) => {
 });
 
 // ===== Servidor =====
+app.get("/", (req, res) => {
+  res.send("Servidor Elyon funcionando 🚀");
+});
 app.listen(PORT, () => {
   console.log(`Servidor iniciado en puerto ${PORT}`);
 });
+
