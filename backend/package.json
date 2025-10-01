@@ -12,6 +12,7 @@
     "express": "^5.1.0",
     "json2csv": "^6.0.0-alpha.2",
     "nodemailer": "^6.9.4",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "sib-api-v3-sdk": "^8.5.0"
   }
 }
