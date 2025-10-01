@@ -165,3 +165,7 @@ app.post("/regalos", (req, res) => {
     });
 });
 
+// ================= PING PARA DESPERTAR RENDER =================
+app.get("/ping", (req, res) => {
+  res.status(200).send("pong ✅");
+});

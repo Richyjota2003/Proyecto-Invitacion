@@ -344,6 +344,13 @@ document.querySelectorAll("img").forEach(img => {
   <script src="script.js"></script>
 
   
+  <script>
+  window.addEventListener("load", () => {
+    fetch("https://invitacion-proyect.onrender.com/ping")
+      .then(() => console.log("Servidor despierto ✅"))
+      .catch(err => console.error("Error al pinguear:", err));
+  });
+</script>
 
 
 </body>
